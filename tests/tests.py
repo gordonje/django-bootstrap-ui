@@ -2,7 +2,10 @@
 from django.template import TemplateSyntaxError
 from django.template.loader import get_template
 from django.test import RequestFactory, SimpleTestCase, TestCase
-from django.core.urlresolvers import reverse
+try:
+    from django.urls import reverse
+except:
+    from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 
 
