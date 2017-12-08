@@ -380,7 +380,7 @@ class ThemingTest(TestCase):
         self.request = RequestFactory().get('/')
 
         # Provide template paths
-        self.template_assignment_tags = get_template('assignmenttags.html')
+        self.template_simple_tags = get_template('simpletags.html')
         self.url_set_theme_view = reverse('set_theme')
 
     def test_theme_in_session_is_set(self):
@@ -405,19 +405,19 @@ class ThemingTest(TestCase):
 
     def test_get_value_from_session_is_ok(self):
         self.request.session = {'DJANGO_BOOTSTRAP_UI_THEME': 'bootstrap-theme-in-session'}
-        rendered = self.template_assignment_tags.render({'request': self.request})
+        rendered = self.template_simple_tags.render({'request': self.request})
         self.assertIn('Theme|bootstrap-theme-in-session', rendered)
 
     def test_get_value_from_cookie_is_ok(self):
         self.request.COOKIES = {'DJANGO_BOOTSTRAP_UI_THEME': 'bootstrap-theme-in-cookies'}
-        rendered = self.template_assignment_tags.render({'request': self.request})
+        rendered = self.template_simple_tags.render({'request': self.request})
         self.assertIn('Theme|bootstrap-theme-in-cookies', rendered)
 
     def test_get_value_from_settings_is_ok(self):
         with self.settings(DJANGO_BOOTSTRAP_UI_THEME='bootstrap-theme-in-settings'):
-            rendered = self.template_assignment_tags.render({'request': self.request})
+            rendered = self.template_simple_tags.render({'request': self.request})
             self.assertIn('Theme|bootstrap-theme-in-settings', rendered)
 
     def test_get_value_default_is_ok(self):
-        rendered = self.template_assignment_tags.render({'request': self.request})
+        rendered = self.template_simple_tags.render({'request': self.request})
         self.assertIn('Theme|bootstrap-theme-default', rendered)

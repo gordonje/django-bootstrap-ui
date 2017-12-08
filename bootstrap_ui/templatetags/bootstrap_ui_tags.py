@@ -8,7 +8,7 @@ from tag_parser.basetags import BaseNode
 register = Library()
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def get_value_from_session_or_cookie(context, key):
     request = context['request']
 
